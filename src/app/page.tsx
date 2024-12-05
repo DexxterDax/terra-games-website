@@ -5,6 +5,9 @@ import EngineerCard from '@/components/engineer-card';
 import GamesSection from '@/components/games-card';
 import { Noise } from '../components/ui/noise';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import Link from 'next/link';
+import dreaming from "@/images/Dreaming.png"
 
 
 export default function Home() {
@@ -106,10 +109,55 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Projects Grid */}
+
+            {/* Projects Grid */}
       <section className="px-8 py-24 bg-[#F5F5F3]">
         <GamesSection />
       </section>
+
+      {/* About Us Section */}
+      <section className="relative py-32 px-8 bg-[#F5F5F3]">
+      {/* <Noise /> */}
+
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image Side */}
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={dreaming}
+                alt="About TerraDream Games"
+                className="object-cover"
+                priority
+              />
+              {/* <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" /> */}
+            </div>
+
+            {/* Content Side */}
+            <div className="space-y-8">
+              <h2 className="text-5xl font-bold">
+                About Us
+              </h2>
+              <div className="space-y-6">
+                <p className="text-xl leading-relaxed">
+                  Our goal is to create the most innovative, interactive, and fun-to-play experiences on the Roblox platform.
+                </p>
+                <p className="text-xl leading-relaxed">
+                  Join us on this exciting adventure as we explore uncharted territories, push the limits of creativity, and redefine the gaming experience on Roblox.
+                </p>
+                <Button 
+                  className="hover:scale-105 bg-slate-800 ansition-transform"
+                  asChild
+                >
+                  <Link href="/about">
+                    Learn More About Us
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Team Section  bg-[#0A0A0B]*/}
       <section className="px-8 py-32 bg-[#0A0A0B]">

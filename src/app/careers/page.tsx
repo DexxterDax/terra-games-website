@@ -49,13 +49,13 @@ export default function Careers() {
     <div className="min-h-screen bg-[#F5F5F3] relative">
       <Noise />
       
-      {/* Hero Section */}
       <section className="relative py-24 px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
             className="text-center space-y-6"
           >
             <h1 className="text-6xl font-bold">Join Our Team</h1>
@@ -66,13 +66,13 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-16 px-8 bg-black text-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
             className="text-center space-y-4"
           >
             <Users className="w-8 h-8 mx-auto text-orange-500" />
@@ -84,6 +84,7 @@ export default function Careers() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
             className="text-center space-y-4"
           >
             <Star className="w-8 h-8 mx-auto text-orange-500" />
@@ -95,6 +96,7 @@ export default function Careers() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
             className="text-center space-y-4"
           >
             <MapPin className="w-8 h-8 mx-auto text-orange-500" />
@@ -104,13 +106,13 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* Open Positions */}
       <section className="py-24 px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
             className="mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">Open Positions</h2>
@@ -124,6 +126,7 @@ export default function Careers() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
                 className="group relative bg-white rounded-xl p-8 hover:shadow-xl transition-shadow"
               >
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">

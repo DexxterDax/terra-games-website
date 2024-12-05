@@ -15,6 +15,7 @@ const GamesSection = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
         className="text-center mb-20"
       >
         <h2 className="text-6xl font-bold mb-4">Our Games</h2>
@@ -25,10 +26,12 @@ const GamesSection = () => {
         {games.map((game, index) => (
           <motion.div
             key={game.id}
+            className="group relative"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative"
+            transition={{ duration: 0.5, delay: index *0.2 }}
+            whileHover={{scale: 1.02}}
+            viewport={{ once: true }}
           >
             <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-gray-900">
               {/* Background Image */}

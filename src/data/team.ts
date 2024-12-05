@@ -5,6 +5,8 @@ export interface TeamMember {
   image: string;
   specialty: string;
   github: string;
+  x: string;
+  discord: string;
   linkedin: string;
   bio?: string;
 }
@@ -18,6 +20,8 @@ export const teamMembers: TeamMember[] = [
     specialty: "Software Engineering",
     github: "https://github.com/DexxterDax",
     linkedin: "https://linkedin.com/in/javaughn-miller",
+    x: "https://x.com/DexxterDax",
+    discord: "https://discord.com/users/746369863156498493",
     bio: "10+ years of game development experience specializing in multiplayer systems",
   },
   {
@@ -26,8 +30,10 @@ export const teamMembers: TeamMember[] = [
     role: "Co-Founder & \nChief Operating Officer",
     image: "/team/placeholder.jpg",
     specialty: "Game Technical Design",
-    github: "https://github.com",
+    github: "https://github.com/xptea",
     linkedin: "https://linkedin.com",
+    x: "https://x.com/VoidsWork",
+    discord: "https://discord.com/users/1139185365597573180",
     bio: "Graphics programming expert with a focus on optimization",
   },
 ]; 
