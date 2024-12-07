@@ -17,13 +17,9 @@ const AnimatedText = ({ text, id }: { text: string, id: string }) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.char-animate').forEach((el) => {
-            (el as HTMLElement).style.animationPlayState = 'running';
-          });
+          containerRef.current?.classList.add('is-visible');
         } else {
-          entry.target.querySelectorAll('.char-animate').forEach((el) => {
-            (el as HTMLElement).style.animationPlayState = 'paused';
-          });
+          containerRef.current?.classList.remove('is-visible');
         }
       },
       { threshold: 0.1 }
@@ -40,23 +36,13 @@ const AnimatedText = ({ text, id }: { text: string, id: string }) => {
     <span className="relative inline-block group" ref={containerRef}>
       <div className="relative inline-flex">
         {text.split('').map((char, i) => (
-          <div 
+          <span 
             key={`${id}-${i}`}
-            id={`${id}-${i}`}
-            className="relative inline-block char-animate"
-            style={{
-              animationName: 'float',
-              animationDuration: '2s',
-              animationTimingFunction: 'ease-in-out',
-              animationIterationCount: 'infinite',
-              animationDelay: `${i * 0.1}s`,
-              animationPlayState: 'paused'
-            }}
+            className="char-animate animate-gradient bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto]"
+            style={{ '--char-index': i } as React.CSSProperties}
           >
-            <span className="animate-gradient bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto]">
-              {char}
-            </span>
-          </div>
+            {char}
+          </span>
         ))}
       </div>
       <span className="absolute -inset-x-2 inset-y-3 bg-orange-500/20 blur-xl -z-10 animate-pulse"></span>

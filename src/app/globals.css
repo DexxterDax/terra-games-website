@@ -102,6 +102,22 @@
   }
 }
 
+.char-animate {
+  transform: translateY(0);
+  transition: transform 0.2s ease-in-out;
+  animation: float 2s ease-in-out infinite paused;
+  animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+.is-visible .char-animate {
+  animation-play-state: running;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 @keyframes wave {
   0%, 100% {
     transform: translateY(0);
