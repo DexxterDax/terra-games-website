@@ -7,8 +7,62 @@ import { Noise } from '../components/ui/noise';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import dreaming from "@/images/Dreaming.png"
+import dreaming from "../../public/images/Dreaming.png"
+import { useEffect, useRef } from 'react';
 
+const AnimatedText = ({ text, id }: { text: string, id: string }) => {
+  const containerRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.char-animate').forEach((el) => {
+            (el as HTMLElement).style.animationPlayState = 'running';
+          });
+        } else {
+          entry.target.querySelectorAll('.char-animate').forEach((el) => {
+            (el as HTMLElement).style.animationPlayState = 'paused';
+          });
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <span className="relative inline-block group" ref={containerRef}>
+      <div className="relative inline-flex">
+        {text.split('').map((char, i) => (
+          <div 
+            key={`${id}-${i}`}
+            id={`${id}-${i}`}
+            className="relative inline-block char-animate"
+            style={{
+              animationName: 'float',
+              animationDuration: '2s',
+              animationTimingFunction: 'ease-in-out',
+              animationIterationCount: 'infinite',
+              animationDelay: `${i * 0.1}s`,
+              animationPlayState: 'paused'
+            }}
+          >
+            <span className="animate-gradient bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto]">
+              {char}
+            </span>
+          </div>
+        ))}
+      </div>
+      <span className="absolute -inset-x-2 inset-y-3 bg-orange-500/20 blur-xl -z-10 animate-pulse"></span>
+    </span>
+  );
+};
 
 export default function Home() {
   return (
@@ -35,74 +89,35 @@ export default function Home() {
       {/* Hero Section */}
       <main className="px-4 sm:px-8 py-12 sm:py-24">
         <div className="max-w-7xl mx-auto relative">
-          {/* Gradient blob - adjust size for mobile */}
-          <div className="absolute -right-10 sm:-right-20 top-0 w-64 sm:w-96 h-64 sm:h-96 bg-orange-500 rounded-full blur-3xl opacity-10"></div>
+          {/* Gradient blob - adjusted for better mobile appearance */}
+          <div className="absolute -right-4 sm:-right-20 top-0 w-48 sm:w-96 h-48 sm:h-96 bg-orange-500 rounded-full blur-3xl opacity-10"></div>
           
-          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold max-w-4xl leading-tight">
-            <span className="block sm:inline">TURNING{" "}</span>
-            <span className="relative inline-block group">
-              <div className="relative inline-flex">
-                {'DREAMS'.split('').map((char, i) => (
-                  <div 
-                    key={`dreams-${i}`}
-                    className="relative inline-block"
-                    style={{
-                      animationName: 'float',
-                      animationDuration: '2s',
-                      animationTimingFunction: 'ease-in-out',
-                      animationIterationCount: 'infinite',
-                      animationDelay: `${i * 0.1}s`,
-                    }}
-                  >
-                    <span className="animate-gradient bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto]">
-                      {char}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <span className="absolute -inset-x-2 inset-y-3 bg-orange-500/20 blur-xl -z-10 animate-pulse"></span>
-            </span>
+          <h1 className="text-4xl sm:text-6xl lg:text-8xl font-bold max-w-4xl leading-[1.2] sm:leading-tight">
+            <span className="block mb-2 sm:mb-0 sm:inline">TURNING{" "}</span>
+            <AnimatedText text="DREAMS" id="dreams" />
             {" "}
-            <span className="block sm:inline">INTO{" "}</span>
-            <span className="relative inline-block group">
-              <div className="relative inline-flex">
-                {'GAMES'.split('').map((char, i) => (
-                  <div 
-                    key={`games-${i}`}
-                    className="relative inline-block"
-                    style={{
-                      animationName: 'float',
-                      animationDuration: '2s',
-                      animationTimingFunction: 'ease-in-out',
-                      animationIterationCount: 'infinite',
-                      animationDelay: `${i * 0.1}s`,
-                    }}
-                  >
-                    <span className="animate-gradient bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text bg-[length:200%_auto]">
-                      {char}
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <span className="absolute -inset-x-2 inset-y-3 bg-orange-500/20 blur-xl -z-10 animate-pulse"></span>
-            </span>
+            <span className="block my-2 sm:my-0 sm:inline">INTO{" "}</span>
+            <AnimatedText text="GAMES" id="games" />
           </h1>
 
-          
-          {/* Content grid - stack on mobile */}
-          <div className="mt-12 sm:mt-24 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden order-2 lg:order-1">
-            <div className="absolute -left-10 sm:-left-20 top-0 w-70 sm:w-96 h-70 sm:h-96 bg-green-300 rounded-full blur-3xl opacity-10"></div>
-              <div className="w-full h-full bg-gray-200 relative">
-                {/* Add your game banner image here */}
-              </div>
+          {/* Content grid - fixed image sizing */}
+          <div className="mt-8 sm:mt-24 flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
+            <div className="flex-1 relative aspect-[4/3] rounded-lg overflow-hidden">
+              <div className="absolute -left-4 sm:-left-20 top-0 w-48 sm:w-96 h-48 sm:h-96 bg-green-300 rounded-full blur-3xl opacity-10"></div>
+              <Image 
+                src="/images/Painting.png" 
+                alt="gC" 
+                fill 
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
-            <div className="space-y-6 order-1 lg:order-2">
-              <p className="text-xl sm:text-2xl">
+            <div className="flex-1 space-y-6">
+              <p className="text-lg sm:text-xl lg:text-2xl max-w-[42ch]">
                 We craft immersive gaming experiences that push the boundaries of creativity and innovation on the Roblox platform.
               </p>
-              <Button className="w-full h-15 sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-black text-white rounded-full hover:bg-black/90 hover:scale-105 transition">
-               View Our Work
+              <Button className="w-full sm:w-auto px-8 py-4 bg-black text-white rounded-full hover:bg-black/90 hover:scale-105 transition text-base sm:text-lg">
+                View Our Work
               </Button>
             </div>
           </div>
@@ -110,15 +125,8 @@ export default function Home() {
       </main>
 
 
-            {/* Projects Grid */}
-      <section className="px-8 py-24 bg-[#F5F5F3]">
-        <GamesSection />
-      </section>
-
-      {/* About Us Section */}
-      <section className="relative py-32 px-8 bg-[#F5F5F3]">
-      {/* <Noise /> */}
-
+            {/* About Us Section */}
+            <section className="relative py-32 px-8 bg-[#F5F5F3]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image Side */}
@@ -158,6 +166,10 @@ export default function Home() {
         </div>
       </section>
 
+            {/* Projects Grid */}
+      <section className="px-8 py-24 bg-[#F5F5F3]">
+        <GamesSection />
+      </section>
 
       {/* Team Section  bg-[#0A0A0B]*/}
       <section className="px-8 py-32 bg-[#0A0A0B]">

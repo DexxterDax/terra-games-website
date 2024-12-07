@@ -2,7 +2,7 @@ import { games } from "@/data/games";
 import { motion } from "framer-motion";
 import { Users, Star, NotebookPenIcon } from "lucide-react";
 import Image from "next/image";
-import gameBanner from "@/images/game-banner.jpg"
+import gameBanner from "../../public/images/game-banner.jpg"
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Icon } from "./ui/icon";

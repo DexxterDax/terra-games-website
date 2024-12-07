@@ -1,5 +1,4 @@
 import { TeamMember } from "@/data/team";
-import gameBanner from "@/images/game-banner.jpg"
 import Image from "next/image";
 import { Icon } from "./ui/icon";
 import { siDiscord, siGithub, siLinkedin, siX } from "simple-icons";
@@ -25,7 +24,7 @@ function EngineerCard({member, index}: Props) {
         
         {/* Image */}
         <Image
-          src={gameBanner}
+          src={member.image}
           alt={member.name}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-110"
