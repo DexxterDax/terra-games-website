@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Briefcase, Users, Star, MapPin } from "lucide-react";
 import { Noise } from "@/components/ui/noise";
+import { useState, useEffect } from "react";
 
 interface JobPosition {
   id: number;
@@ -45,6 +46,12 @@ const positions: JobPosition[] = [
 ];
 
 export default function Careers() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F5F5F3] relative">
       <Noise />
@@ -53,9 +60,8 @@ export default function Careers() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
             className="text-center space-y-6"
           >
             <h1 className="text-6xl font-bold">Join Our Team</h1>
@@ -68,41 +74,19 @@ export default function Careers() {
 
       <section className="py-16 px-8 bg-black text-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center space-y-4"
-          >
-            <Users className="w-8 h-8 mx-auto text-orange-500" />
-            <h3 className="text-4xl font-bold">50+</h3>
-            <p className="text-gray-400">Team Members</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="text-center space-y-4"
-          >
-            <Star className="w-8 h-8 mx-auto text-orange-500" />
-            <h3 className="text-4xl font-bold">4.8/5</h3>
-            <p className="text-gray-400">Employee Rating</p>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-center space-y-4"
-          >
-            <MapPin className="w-8 h-8 mx-auto text-orange-500" />
-            <h3 className="text-4xl font-bold">15+</h3>
-            <p className="text-gray-400">Countries</p>
-          </motion.div>
+          {[Users, Star, MapPin].map((Icon, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="text-center space-y-4"
+            >
+              <Icon className="w-8 h-8 mx-auto text-orange-500" />
+              <h3 className="text-4xl font-bold">{index === 0 ? "50+" : index === 1 ? "4.8/5" : "15+"}</h3>
+              <p className="text-gray-400">{index === 0 ? "Team Members" : index === 1 ? "Employee Rating" : "Countries"}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -110,9 +94,8 @@ export default function Careers() {
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
             className="mb-12"
           >
             <h2 className="text-4xl font-bold mb-4">Open Positions</h2>
@@ -124,7 +107,7 @@ export default function Careers() {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="group relative bg-white rounded-xl p-8 hover:shadow-xl transition-shadow"
@@ -159,4 +142,4 @@ export default function Careers() {
       </section>
     </div>
   );
-} 
+}

@@ -11,7 +11,7 @@ import {Icon}  from "@/components/ui/icon"
 
 export function Footer() {
   return (
-    <footer className="text-white">
+    <footer className="text-white bg-[#0A0A0B]">
       <div className="max-w-7xl mx-auto px-8 py-20">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
