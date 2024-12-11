@@ -52,26 +52,9 @@ const AnimatedText = ({ text, id }: { text: string, id: string }) => {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#F5F5F3] relative">
+    <div className="min-h-screen relative">
       {/* Add noise overlay */}
       <Noise />
-      
-      {/* Navigation */}
-      <nav className="px-8 py-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-bold">TerraDream</span>
-            <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-          </div>
-          
-          <div className="flex gap-4">
-            <a href="#" className="px-4 py-2 rounded-full hover:bg-black/5">Work</a>
-            <a href="#" className="px-4 py-2 rounded-full bg-black text-white">Studio</a>
-            <a href="#" className="px-4 py-2 rounded-full hover:bg-black/5">Contact</a>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <main className="px-4 sm:px-8 py-12 sm:py-24">
         <div className="max-w-7xl mx-auto relative">
@@ -88,8 +71,8 @@ export default function Home() {
 
           {/* Content grid - fixed image sizing */}
           <div className="mt-8 sm:mt-24 flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
+            <div className="absolute -left-4 sm:-left-20 top-0 w-48 sm:w-96 h-48 sm:h-96 bg-green-300 rounded-full blur-3xl opacity-10"></div>
             <div className="flex-1 relative aspect-[4/3] rounded-lg overflow-hidden">
-              <div className="absolute -left-4 sm:-left-20 top-0 w-48 sm:w-96 h-48 sm:h-96 bg-green-300 rounded-full blur-3xl opacity-10"></div>
               <Image 
                 src="/images/Painting.png" 
                 alt="gC" 
